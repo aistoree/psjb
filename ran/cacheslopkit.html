@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html manifest="slopkit.manifest">
 <head>
-    <title>Ai Store  Eng/Abdelrahman Afifi 01094737134 - Cache 11.50-13.00</title>
+    <title>Ai Store  Eng/Abdelrahman Afifi 01094737134 - Cache 5.05 - 13.52</title>
     <link rel="stylesheet" href="../style.css">
-    <style>
-        /* تثبيت اسم Eng/Abdelrahman Afifie باللون الذهبي الثابت */
-        .name-Eng/Abdelrahman Afifi {
+    <style>Big Megoo {
             color: #ffd700 !important;
             font-weight: 900 !important;
             font-size: 3rem !important;
@@ -24,20 +22,20 @@
     <div class="container">
         <header>
             <h1 class="main-title">
-                <span class="name-Ai Store">Ai Store</span>
-                <span class="Eng-title">Eng</span>
-                <span class="Abdelrahman Afifi-title">Abdelrahman Afifi</span>
+            <span class="name-Ai Store">Ai Store</span>
+            <span class="Eng-title">Eng</span>
+            <span class="Abdelrahman Afifi-title">Abdelrahman Afifi</span>
             </h1>
-            <div class="subtitle">Ps4 تعديل</div>
-            <div class="version-badge">FW 11.50 - 13.00</div>
+            <div class="subtitle"> Ps4 Exploit Host</div>
+            <div class="version-badge">FW 5.05 - 13.52</div>
         </header>
-        
+
         <hr class="separator">
-        
+
         <div class="status-bar">
-            <span id="msgs" class="status-text loading">بدء تثبيت ذاكرة التخزين المؤقت....</span>
-           </div>
-        
+            <span id="msgs" class="status-text loading">⏳ Starting Cache Installation...</span>
+        </div>
+
         <footer>
             <p class="credit">Designed by <a href="#" class="credit-link">Ai Store  Eng/Abdelrahman Afifi 01094737134</a></p>
             <span style="color: ##FFFFFF; font-size: 20px;">العنوان/محافظة الشرقية/فاقوس/ش مشالي بجوار مدرسة النصر ومكتبة علاء الدين </span>
@@ -45,31 +43,48 @@
     </div>
 
     <script>
-        history.replaceState(null, null, 'index.html');
-        var histlength = history.length;
-        history.go(-histlength);
-        
-        var msgs = document.getElementById('msgs');
-        
-        function DLProgress(e) {
-            var Percent = Math.round(e.loaded / e.total * 100);
-            msgs.innerHTML = "Installing Offline Cache: " + Percent + "%";
-        }
-        
-        function DisplayCacheProgress() {
-            msgs.innerHTML = "Cache Installed Successfully";
-            msgs.className = "status-text success";
-            setTimeout(function() {
-                msgs.innerHTML = "الان اغلق المتصفح واغلق الانترنت واعادة فتح المتصفح ...";
-            }, 1500);
-        }
-        
-        window.applicationCache.addEventListener("progress", DLProgress, false);
-        window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
-        window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-        window.applicationCache.onerror = function(e) {
-            msgs.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
-            msgs.className = "status-text error";
+        window.onload = function () {
+            var msgs = document.getElementById('msgs');
+
+            // ====== تنظيف الهيستوري (بعد التحميل) ======
+            try {
+                history.replaceState(null, null, 'index.html');
+                var histlength = history.length;
+                if (histlength > 1) {
+                    history.go(-histlength);
+                }
+            } catch (err) {
+                console.log("History error:", err);
+            }
+
+            // ====== دوال الكاش ======
+            function DLProgress(e) {
+                var Percent = Math.round(e.loaded / e.total * 100);
+                msgs.innerHTML = "Installing Offline Cache: " + Percent + "%";
+                msgs.className = "status-text loading";
+            }
+
+            function DisplayCacheProgress() {
+                msgs.innerHTML = "Cache Installed Successfully ✔";
+                msgs.className = "status-text success";
+                setTimeout(function () {
+                    msgs.innerHTML = "Now Close And Re-Open Your Browser ...";
+                }, 1500);
+            }
+
+            // ====== التحقق من وجود applicationCache ======
+            if (window.applicationCache) {
+                window.applicationCache.addEventListener("progress", DLProgress, false);
+                window.applicationCache.oncached = function (e) { DisplayCacheProgress(); };
+                window.applicationCache.onupdateready = function (e) { DisplayCacheProgress(); };
+                window.applicationCache.onerror = function (e) {
+                    msgs.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+                    msgs.className = "status-text error";
+                };
+            } else {
+                msgs.innerHTML = "Your browser does not support Offline Cache.";
+                msgs.className = "status-text error";
+            }
         };
     </script>
 </body>
